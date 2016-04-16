@@ -85,19 +85,19 @@ Parse.Cloud.define("pull", function(req,res){
 	     for(var item in response.headers) {
 	       console.log(item + ": " + response.headers[item]);
 	     }
-	     console.log("Body: "+ body);
-	     // var transaction = new Parse.Object.extend("transaction");
-	        // var query = new Parse.Query(transaction);
-	        // query.equalTo("_id", req.params.id);
-	        // query.first({
-	        //    success: function(object) {
-	        //       object.set("status","pulled");
-	        //       object.save();
-	        //    },
-	        //    error: function(error) {
-	        //       alert("Error: " + error.code + " " + error.message);
-	        //    }
-	        // });
+			console.log("Body: "+ body);
+			var transaction = new Parse.Object.extend("transaction");
+			var query = new Parse.Query(transaction);
+			query.equalTo("_id", objId);
+			query.first({
+			   success: function(object) {
+			      object.set("status","Pulled");
+			      object.save();
+			   },
+			   error: function(error) {
+			      alert("Error: " + error.code + " " + error.message);
+			   }
+			});
 	   } else {
 	     console.log("Got error: " + error.message);
 	   }
