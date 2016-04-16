@@ -15,7 +15,7 @@ Parse.Cloud.afterSave('transaction',function(req,res){
 	  // error
 	  console.error('Request failed with response code ' + httpResponse.status);
 	});
-	// req.object.set("amount",66);
+	 req.object.set("amount",66);
 
 	res.sucess();
 
