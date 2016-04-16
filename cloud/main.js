@@ -165,7 +165,7 @@ Parse.Cloud.define("push", function(req,res){
 	  }
 	);
 
-	Parse.Cloud.run('setBalance', { origin: "martin", to:"jaime", amount:20}).then(function(data) {
+	Parse.Cloud.run('setBalance', { origin: "martin", to:"jaime", amount:1}).then(function(data) {
 			      console.log(data);
 			  });
 
@@ -182,17 +182,15 @@ Parse.Cloud.define("setBalance", function(req,res){
 	var query = new Parse.Query(Parse.User);
     query.equalTo("username", origin); 
     query.first({
-      success: function(martin) {
+      success: function(user) {
       	console.log(martin);
-  
-
-       	var initialAmount = martin.get("balance");
+       	var initialAmount = user.get("balance");
        	console.log(origin + " has $" + initialAmount + " initially and has to pay: $" + amount);
-       	if(amount < initialAmount){
-       		martin.set("balance",(initialAmount - amount));
-        	martin.save();
+       	if(amount <= initialAmount){
+       		user.set("balance",(initialAmount - amount));
+        	user.save();
         }else{
-        	console.log(origin + "doesn't have enough $ to pay $" + amount);
+        	console.log(origin + " doesn't have enough $ to pay $" + amount);
         }
 
       }
