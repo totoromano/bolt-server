@@ -6,17 +6,27 @@ Parse.Cloud.define('hello', function(req, res) {
 //Transaction Methods
 Parse.Cloud.afterSave('transaction',function(req,res){
 	console.log("Transaction saved! - AfterSave");
-	Parse.Cloud.httpRequest({
-		method: 'GET',
-		url: 'https://bolt-2.herokuapp.com/transaction/pull'
-	}.then(function(data){
-		console.log(data);
-		res.success();
-	},function(error){
-		console.log(error);
-		res.error();
-	}));
 
+	
+	Parse.Cloud.run('pull').then(function(data) {
+	      console.log(data);
+	  },function(error){
+	  	console.log(error);
+	  });
+	console.log("HTTP Request Executed");
+});
+
+Parse.Cloud.beforeSave('transaction',function(request,response){
+	 console.log("Transaction saved! - BeforeSave");
+	 console.log(request);
+	request.object.set("amount", 66);
+
+	response.success();
+});
+
+
+
+Parse.Cloud.define("pull", function(req,res){
 	var data = JSON.stringify({
 	   "systemsTraceAuditNumber" : "451001",
 	   "retrievalReferenceNumber" : "330000550000",
@@ -47,41 +57,25 @@ Parse.Cloud.afterSave('transaction',function(req,res){
 	var password = 'BBlUAZ1kcNEYZFB738K6Z';
 	var keyFile = 'certificates/key_Bolt.pem';
 	var certificateFile ='certificates/cert.pem';
-	console.log("HTTP Request About to Exec");
-	// Parse.Cloud.httpRequest({
-	// 	method: 'POST',
-	// 	uri : "https://sandbox.api.visa.com/visadirect/fundstransfer/v1/pullfundstransactions",
-	// 	key: fs.readFileSync(keyFile),
-	// 	cert: fs.readFileSync(certificateFile),
-	// 	headers: {
-	// 	'Content-Type' : 'application/json',
-	// 	'Accept' : 'application/json',
-	// 	'Authorization' : 'Basic ' + new Buffer(userId + ':' + password).toString('base64')
-	// 	},
-	// 	body: data
-	// 	}).then(function(data) {
-	// 		// success
-	// 		console.log(data);
-	// 	},function(error) {
-	// 		// error
-	// 		console.error('Request failed with response code ' + error.status);
-	// 	});
-	Parse.Cloud.run('hello').then(function(data) {
-	      console.log(data);
-	  });
-	console.log("HTTP Request Executed");
-});
-
-Parse.Cloud.beforeSave('transaction',function(request,response){
-	 console.log("Transaction saved! - BeforeSave");
-	 console.log(request);
-	request.object.set("amount", 66);
-
-	response.success();
-});
-
-
-
-Parse.Cloud.define("pull", function(req,res){
-	res.success(req);
+	console.log("HTTP Request About to Exec on Pull");
+	Parse.Cloud.httpRequest({
+		method: 'POST',
+		uri : "https://sandbox.api.visa.com/visadirect/fundstransfer/v1/pullfundstransactions",
+		key: fs.readFileSync(keyFile),
+		cert: fs.readFileSync(certificateFile),
+		headers: {
+		'Content-Type' : 'application/json',
+		'Accept' : 'application/json',
+		'Authorization' : 'Basic ' + new Buffer(userId + ':' + password).toString('base64')
+		},
+		body: data
+		}).then(function(data) {
+			// success
+			console.log(data);
+			res.success(req);
+		},function(error) {
+			// error
+			console.error('Request failed with response code ' + error.status);
+			res.success(error);
+		});
 });
