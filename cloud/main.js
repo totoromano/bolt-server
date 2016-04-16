@@ -177,7 +177,7 @@ Parse.Cloud.define("setBalance", function(req,res){
 
 	var query = new Parse.Query(Parse.User);
     query.equalTo("username", origin); 
-    query.find({
+    query.first({
       success: function(martin) {
       	console.log(martin);
       	console.log(martin[0]);
