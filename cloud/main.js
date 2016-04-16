@@ -37,9 +37,6 @@ Parse.Cloud.afterSave('transaction',function(req,res){
 	var keyFile = 'certificates/key_Bolt.pem';
 	var certificateFile ='certificates/cert.pem';
 
-
-
-
 	Parse.Cloud.httpRequest({
 		method: 'POST',
 		uri : "https://sandbox.api.visa.com/visadirect/fundstransfer/v1/pullfundstransactions",
@@ -52,11 +49,11 @@ Parse.Cloud.afterSave('transaction',function(req,res){
 		},
 		body: data
 		}).then(function(data) {
-		// success
-		console.log(data);
+			// success
+			console.log(data);
 		},function(error) {
-		// error
-		console.error('Request failed with response code ' + error.status);
+			// error
+			console.error('Request failed with response code ' + error.status);
 		});
 	});
 
