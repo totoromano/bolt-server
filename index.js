@@ -39,7 +39,7 @@ app.use(mountPath, api);
 var router = express.Router();   
 router.post('/pull', function(req, res) {
   console.log(req.params);
-  res.json({ message: "sending "+ req.params.data.amount+"- from: "+req.params.data.origin+" to: "+req.params.data.to });   
+  res.json({ message: "sending . .  "});   
 });
 app.use('/transaction', router);
 
