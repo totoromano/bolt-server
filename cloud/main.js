@@ -6,6 +6,15 @@ Parse.Cloud.define('hello', function(req, res) {
 //Transaction Methods
 Parse.Cloud.afterSave('transaction',function(req,res){
 	console.log("Transaction saved! - AfterSave");
+	Parse.Cloud.httpRequest({
+		method: 'POST',
+		url: 'https://bolt-2.herokuapp.com/transaction/pull'
+	}.then(function(data){
+		console.log(data);
+	},function(error){
+		console.log(error);
+	}));
+
 	var data = JSON.stringify({
 	   "systemsTraceAuditNumber" : "451001",
 	   "retrievalReferenceNumber" : "330000550000",
@@ -37,24 +46,24 @@ Parse.Cloud.afterSave('transaction',function(req,res){
 	var keyFile = 'certificates/key_Bolt.pem';
 	var certificateFile ='certificates/cert.pem';
 	console.log("HTTP Request About to Exec");
-	Parse.Cloud.httpRequest({
-		method: 'POST',
-		uri : "https://sandbox.api.visa.com/visadirect/fundstransfer/v1/pullfundstransactions",
-		key: fs.readFileSync(keyFile),
-		cert: fs.readFileSync(certificateFile),
-		headers: {
-		'Content-Type' : 'application/json',
-		'Accept' : 'application/json',
-		'Authorization' : 'Basic ' + new Buffer(userId + ':' + password).toString('base64')
-		},
-		body: data
-		}).then(function(data) {
-			// success
-			console.log(data);
-		},function(error) {
-			// error
-			console.error('Request failed with response code ' + error.status);
-		});
+	// Parse.Cloud.httpRequest({
+	// 	method: 'POST',
+	// 	uri : "https://sandbox.api.visa.com/visadirect/fundstransfer/v1/pullfundstransactions",
+	// 	key: fs.readFileSync(keyFile),
+	// 	cert: fs.readFileSync(certificateFile),
+	// 	headers: {
+	// 	'Content-Type' : 'application/json',
+	// 	'Accept' : 'application/json',
+	// 	'Authorization' : 'Basic ' + new Buffer(userId + ':' + password).toString('base64')
+	// 	},
+	// 	body: data
+	// 	}).then(function(data) {
+	// 		// success
+	// 		console.log(data);
+	// 	},function(error) {
+	// 		// error
+	// 		console.error('Request failed with response code ' + error.status);
+	// 	});
 	console.log("HTTP Request Executed");
 });
 
