@@ -34,6 +34,14 @@ app.use('/public', express.static(path.join(__dirname, '/public')));
 var mountPath = process.env.PARSE_MOUNT || '/parse';
 app.use(mountPath, api);
 
+
+//Custom Bolt's API
+var router = express.Router();   
+router.get('/', function(req, res) {
+    res.json({ message: "hooray! welcome to bolt's api!" });   
+});
+app.use('/api', router);
+
 // Parse Server plays nicely with the rest of your web routes
 // app.get('/', function(req, res) {
 //   res.status(200).send('Make sure to star the parse-server repo on GitHub! *');
