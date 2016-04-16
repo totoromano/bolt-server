@@ -7,7 +7,7 @@ Parse.Cloud.define('hello', function(req, res) {
 Parse.Cloud.afterSave('transaction',function(req,res){
 	console.log("Transaction saved! - AfterSave");
 	Parse.Cloud.httpRequest({
-	  url: '/transaction/pull'
+	  url: 'https://bolt-2.herokuapp.com/transaction/pull'
 	}).then(function(data) {
 	  // success
 	  console.log(data);
