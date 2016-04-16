@@ -92,7 +92,7 @@ Parse.Cloud.define("pull", function(req,res){
 	              object.save();
 	           },
 	           error: function(error) {
-	              alert("Error: " + error code + " " + error.message);
+	              alert("Error: " + error.code + " " + error.message);
 	           }
 	        });
 	   } else {
