@@ -6,10 +6,6 @@ Parse.Cloud.define('hello', function(req, res) {
 //Transaction Methods
 Parse.Cloud.afterSave('transaction',function(req,res){
 	console.log("Transaction saved!");
-	Parse.Cloud.run('pull',{ data: req.params
-	}).then(function(data) {
-              console.log(data);
-     });
 	// Parse.Cloud.httpRequest({
 	//   url: '/transaction/pull',
 	//   body:{
@@ -22,7 +18,7 @@ Parse.Cloud.afterSave('transaction',function(req,res){
 	//   // error
 	//   console.error('Request failed with response code ' + httpResponse.status);
 	// });
-	req.object.set("user_id",1);
+	req.object.set("amount",66);
 
 	res.sucess();
 
