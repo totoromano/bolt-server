@@ -15,25 +15,25 @@ Parse.Cloud.afterSave('transaction',function(req,res){
 	//   // error
 	//   console.error('Request failed with response code ' + httpResponse.status);
 	// });
-	query = new Parse.Query("transaction");
-  query.get(request.object.get("transaction").id, {
-    success: function(operation) {
-      operation.set("amount",99);
-      operation.save();
-    },
-    error: function(error) {
-      console.error("Got an error " + error.code + " : " + error.message);
-    }
-  });
+	// query = new Parse.Query("transaction");
+ //  query.get(request.object.get("transaction").id, {
+ //    success: function(operation) {
+ //      operation.set("amount",99);
+ //      operation.save();
+ //    },
+ //    error: function(error) {
+ //      console.error("Got an error " + error.code + " : " + error.message);
+ //    }
+ //  });
 	 
 
 });
 
 Parse.Cloud.beforeSave('transaction',function(req,res){
-	console.log("Transaction saved!");
-	// req.object.set("amount",66);
+	// console.log("Transaction saved!");
+	// // req.object.set("amount",66);
 
-	res.sucess();
+	// res.sucess();
 });
 
 
