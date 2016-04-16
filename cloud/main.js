@@ -182,11 +182,11 @@ Parse.Cloud.define("setBalance", function(req,res){
     query.first({
       success: function(martin) {
       	console.log(martin);
-      	console.log(martin[0]);
+  
 
-       	var initialAmount = martin[0].get("balance");
+       	var initialAmount = martin.get("balance");
        	console.log("Martin has $"+initialAmount+" initially and has to pay: $"+amount);
-       	martin[0].set("balance",10);
+       	martin.set("balance",10);
 
         martin.save();
       }
