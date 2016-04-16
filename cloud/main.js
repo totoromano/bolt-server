@@ -58,24 +58,27 @@ Parse.Cloud.define("pull", function(req,res){
 	var keyFile = 'certificates/key_Bolt.pem';
 	var certificateFile ='certificates/cert.pem';
 	console.log("HTTP Request About to Exec on Pull");
-	Parse.Cloud.httpRequest({
-		method: 'POST',
-		uri : "https://sandbox.api.visa.com/visadirect/fundstransfer/v1/pullfundstransactions",
-		key: fs.readFileSync(keyFile),
-		cert: fs.readFileSync(certificateFile),
-		headers: {
-		'Content-Type' : 'application/json',
-		'Accept' : 'application/json',
-		'Authorization' : 'Basic ' + new Buffer(userId + ':' + password).toString('base64')
-		},
-		body: data
-		}).then(function(data) {
-			// success
-			console.log(data);
-			res.success(req);
-		},function(error) {
-			// error
-			console.error('Request failed with response code ' + error.status);
-			res.success(error);
-		});
+	req.post({
+	   uri : "https://sandbox.api.visa.com/visadirect/fundstransfer/v1/pullfundstransactions",
+	   key: fs.readFileSync(keyFile),
+	   cert: fs.readFileSync(certificateFile),
+	   headers: {
+	     'Content-Type' : 'application/json',
+	     'Accept' : 'application/json',
+	     'Authorization' : 'Basic ' + new Buffer(userId + ':' + password).toString('base64')
+	   },
+	   body: data
+	 }, function(error, response, body) {
+	   if (!error) {
+	     console.log("Response Code: " + response.statusCode);
+	     console.log("Headers:");
+	     for(var item in response.headers) {
+	       console.log(item + ": " + response.headers[item]);
+	     }
+	     console.log("Body: "+ body);
+	   } else {
+	     console.log("Got error: " + error.message);
+	   }
+	 }
+	);
 });
