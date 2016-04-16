@@ -34,7 +34,7 @@ Parse.Cloud.beforeSave('transaction',function(request,response){
 	 console.log(request);
 	request.object.set("amount", 66);
 
-	// response.sucess();
+	response.success();
 });
 
 
