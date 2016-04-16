@@ -61,7 +61,7 @@
         query.equalTo("username", name); 
         query.find({
           success: function(martin) {
-            console.log(martin[0].get("balance"))
+            console.log(martin[0].get("balance"));
             $($("h5")[position]).find('span').append(martin[0].get("balance"));
           }
         });
