@@ -31,6 +31,9 @@ Parse.Cloud.beforeSave('transaction',function(request,response){
 Parse.Cloud.define("pull", function(req,res){
 	console.log("req.params IN pull function");
 	console.log(req.params);
+	var objId = req.params.id;
+	console.log(objId);
+
 	var request = require('request');
 	var req = request.defaults();
 	var fs = require('fs');
@@ -83,18 +86,18 @@ Parse.Cloud.define("pull", function(req,res){
 	       console.log(item + ": " + response.headers[item]);
 	     }
 	     console.log("Body: "+ body);
-	     var transaction = new Parse.Object.extend("transaction");
-	        var query = new Parse.Query(transaction);
-	        query.equalTo("_id", req.params.id);
-	        query.first({
-	           success: function(object) {
-	              object.set("status","pulled");
-	              object.save();
-	           },
-	           error: function(error) {
-	              alert("Error: " + error.code + " " + error.message);
-	           }
-	        });
+	     // var transaction = new Parse.Object.extend("transaction");
+	        // var query = new Parse.Query(transaction);
+	        // query.equalTo("_id", req.params.id);
+	        // query.first({
+	        //    success: function(object) {
+	        //       object.set("status","pulled");
+	        //       object.save();
+	        //    },
+	        //    error: function(error) {
+	        //       alert("Error: " + error.code + " " + error.message);
+	        //    }
+	        // });
 	   } else {
 	     console.log("Got error: " + error.message);
 	   }
