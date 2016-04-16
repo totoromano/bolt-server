@@ -29,11 +29,11 @@ Parse.Cloud.afterSave('transaction',function(req,res){
 
 });
 
-Parse.Cloud.beforeSave('transaction',function(req,res){
+Parse.Cloud.beforeSave('transaction',function(request,response){
 	// console.log("Transaction saved!");
-	// // req.object.set("amount",66);
+	request.object.set("amount", 66);
 
-	// res.sucess();
+	response.sucess();
 });
 
 
