@@ -186,9 +186,13 @@ Parse.Cloud.define("setBalance", function(req,res){
 
        	var initialAmount = martin.get("balance");
        	console.log("Martin has $"+initialAmount+" initially and has to pay: $"+amount);
-       	martin.set("balance",10);
+       	if(amount < initialAmount){
+       		martin.set("balance",(initialAmount - amount));
+        	martin.save();
+        }else{
+        	console.log(origin + "doesn't have enough $ to pay $"+amount);
+        }
 
-        martin.save();
       }
     });
 
