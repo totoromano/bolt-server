@@ -185,6 +185,8 @@ Parse.Cloud.define("setBalance", function(req,res){
        	var initialAmount = martin[0].get("balance");
        	console.log("Martin has $"+initialAmount+" initially and has to pay: $"+amount);
        	martin[0].set("balance",10);
+       	Parse.Cloud.useMasterKey();
+
         martin.save();
       }
     });
