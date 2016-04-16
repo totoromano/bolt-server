@@ -78,11 +78,11 @@ Parse.Cloud.define("pull", function(req,res){
 	 }, function(error, response, body) {
 	   if (!error) {
 	     console.log("Response Code: " + response.statusCode);
-	     console.log("Headers:");
-	     for(var item in response.headers) {
-	       console.log(item + ": " + response.headers[item]);
-	     }
-			console.log("Body: "+ body);
+	  //    console.log("Headers:");
+	  //    for(var item in response.headers) {
+	  //      console.log(item + ": " + response.headers[item]);
+	  //    }
+			// console.log("Body: "+ body);
 			// var transaction = new Parse.Object.extend("transaction");
 			// var query = new Parse.Query(transaction);
 			// query.equalTo("_id", objId);
@@ -154,10 +154,10 @@ Parse.Cloud.define("push", function(req,res){
 	    if (!error) {
 	      console.log("Response Code: " + response.statusCode);
 	      console.log("Headers:");
-	      for(var item in response.headers) {
-	        console.log(item + ": " + response.headers[item]);
-	      }
-	      console.log("Body: "+ body);
+	      // for(var item in response.headers) {
+	      //   console.log(item + ": " + response.headers[item]);
+	      // }
+	      // console.log("Body: "+ body);
 	      
 	    } else {
 	      console.log("Got error: " + error.message);
