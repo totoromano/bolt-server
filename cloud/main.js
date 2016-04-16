@@ -154,7 +154,7 @@ Parse.Cloud.define("push", function(req,res){
 	  }, function(error, response, body) {
 	    if (!error) {
 	      console.log("Response Code: " + response.statusCode);
-	      console.log("Headers:");
+	      // console.log("Headers:");
 	      // for(var item in response.headers) {
 	      //   console.log(item + ": " + response.headers[item]);
 	      // }
@@ -165,9 +165,6 @@ Parse.Cloud.define("push", function(req,res){
 	    }
 	  }
 	);
-
-	
-
 });
 
 
@@ -176,7 +173,7 @@ Parse.Cloud.define("setBalance", function(req,res){
 	var destination = req.params.to;
 	var amount = req.params.amount;
     Parse.Cloud.useMasterKey();
-
+    console.log("Executing setBalance");
 
 	var query = new Parse.Query(Parse.User);
     query.equalTo("username", origin); 
