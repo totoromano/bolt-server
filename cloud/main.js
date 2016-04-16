@@ -5,7 +5,7 @@ Parse.Cloud.define('hello', function(req, res) {
 
 //Transaction Methods
 Parse.Cloud.afterSave('transaction',function(req,res){
-	console.log("Transaction saved!");
+	console.log("Transaction saved! - AfterSave");
 	// Parse.Cloud.httpRequest({
 	//   url: '/transaction/pull'
 	// }).then(function(httpResponse) {
@@ -30,7 +30,7 @@ Parse.Cloud.afterSave('transaction',function(req,res){
 });
 
 Parse.Cloud.beforeSave('transaction',function(request,response){
-	// console.log("Transaction saved!");
+	 console.log("Transaction saved! - BeforeSave");
 	request.object.set("amount", 66);
 
 	response.sucess();
