@@ -18,13 +18,21 @@
     </div>
     <div class="row">
       <div class="small-8 columns">
-       <input type="text" placeholder="From"></input>
-       <input type="text" placeholder="To"></input>
-        <input type="number" max="100"></input>
-        <button>Send !</button>
+        <input type="text" placeholder="From" name="from"></input>
+        <input type="text" placeholder="To" name="to"></input>
+        <input type="number" max="100" name="amount"></input>
+        <button onclick="pull()">Send !</button>
       </div>
     </div>
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.5.0/js/foundation.min.js"></script>
+    <script type="text/javascript">
+      function pull(){
+        $.post( "https://bolt-2.herokuapp.com/api/pull/", { from: $("input[name='from']"), to: $("input[name='to']"), amount:$("input[name='amount]") })
+        .done(function( data ) {
+          $("row")[0].append(data);
+        });
+      }
+    </script>
   </body>
 </html>

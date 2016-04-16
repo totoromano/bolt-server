@@ -37,8 +37,8 @@ app.use(mountPath, api);
 
 //Custom Bolt's API
 var router = express.Router();   
-router.get('/', function(req, res) {
-    res.json({ message: "hooray! welcome to bolt's api!" });   
+router.post('/pull/:data', function(req, res) {
+    res.json({ message: "sending "+ req.params.data.amount+"- from: "+req.params.data.from+" to: "+req.params.data.to });   
 });
 app.use('/api', router);
 
