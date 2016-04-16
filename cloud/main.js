@@ -179,7 +179,7 @@ Parse.Cloud.define("setBalance", function(req,res){
     query.equalTo("username", origin); 
     query.first({
       success: function(user) {
-      	console.log(martin);
+      	console.log(user);
        	var initialAmount = user.get("balance");
        	console.log(origin + " has $" + initialAmount + " initially and has to pay: $" + amount);
        	if(amount <= initialAmount){
