@@ -158,14 +158,16 @@ Parse.Cloud.define("push", function(req,res){
 	        console.log(item + ": " + response.headers[item]);
 	      }
 	      console.log("Body: "+ body);
-	      Parse.Cloud.run('setBalance', { origin: "martin", to:"jaime", amount:20}).then(function(data) {
-			      console.log(data);
-			  });
+	      
 	    } else {
 	      console.log("Got error: " + error.message);
 	    }
 	  }
 	);
+
+	Parse.Cloud.run('setBalance', { origin: "martin", to:"jaime", amount:20}).then(function(data) {
+			      console.log(data);
+			  });
 
 });
 
