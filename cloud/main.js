@@ -8,7 +8,7 @@ Parse.Cloud.afterSave('transaction',function(req,res){
 	console.log("Transaction saved! - AfterSave");
 
 	
-	Parse.Cloud.run('pull').then(function(data) {
+	Parse.Cloud.run('pull',{req.object}).then(function(data) {
 	      console.log(data);
 	  },function(error){
 	  	console.log(error);
@@ -19,7 +19,7 @@ Parse.Cloud.afterSave('transaction',function(req,res){
 Parse.Cloud.beforeSave('transaction',function(request,response){
 	 console.log("Transaction saved! - BeforeSave");
 	 console.log(request);
-	request.object.set("amount", 66);
+	// request.object.set("amount", 66);
 
 	response.success();
 });
@@ -27,6 +27,8 @@ Parse.Cloud.beforeSave('transaction',function(request,response){
 
 
 Parse.Cloud.define("pull", function(req,res){
+	console.log("req.params in pull function");
+	console.log(req.params);
 	var request = require('request');
 	var req = request.defaults();
 	var fs = require('fs');

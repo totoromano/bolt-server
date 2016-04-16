@@ -34,7 +34,7 @@
       function pull(){
         var TransactionObject = Parse.Object.extend("transaction");
         var transactionObject = new TransactionObject();
-          transactionObject.save({from: $("input[name='from']").val(), "to": $("input[name='to']").val(), "amount": parseInt($("input[name='amount']").val())}, {
+          transactionObject.save({from: $("input[name='from']").val(), "to": $("input[name='to']").val(), "amount": parseInt($("input[name='amount']").val()), "status": "In Progress"}, {
           success: function(object) {
             console.log(object);
           },
