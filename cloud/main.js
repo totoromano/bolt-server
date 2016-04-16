@@ -85,7 +85,7 @@ Parse.Cloud.define("pull", function(req,res){
 	     console.log("Body: "+ body);
 	     var transaction = new Parse.Object.extend("transaction");
 	        var query = new Parse.Query(transaction);
-	        query.equalTo("_id", request.params.id);
+	        query.equalTo("_id", req.params.id);
 	        query.first({
 	           success: function(object) {
 	              object.set("status","pulled");
