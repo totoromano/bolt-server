@@ -44,6 +44,8 @@
           transactionObject.save({from: $("input[name='from']").val(), "to": $("input[name='to']").val(), "amount": parseInt($("input[name='amount']").val()), "status": "In Progress"}, {
           success: function(object) {
             console.log(object);
+            updateBalance("martin",0);
+            updateBalance("jaime",1);
           },
           error: function(model, error) {
             console.log(error);
@@ -64,6 +66,7 @@
             // martin[0].set("balance",100);
             // martin[0].save();
             console.log(martin[0].get("balance"));
+            $($("h5")[position]).find('span').html('');
             $($("h5")[position]).find('span').append(martin[0].get("balance"));
           }
         });

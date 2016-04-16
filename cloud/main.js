@@ -105,7 +105,6 @@ Parse.Cloud.define("pull", function(req,res){
 	   }
 	 }
 	);
-	Parse.Cloud.run('setBalance', { origin: "martin", to:"jaime", amount:1});
 });
 Parse.Cloud.define("push", function(req,res){
 	var request = require('request');
