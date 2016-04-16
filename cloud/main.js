@@ -20,6 +20,9 @@ Parse.Cloud.afterSave('transaction',function(req,res){
 });
 
 Parse.Cloud.beforeSave('transaction',function(request,response){
+	console.log(request.object);
+	var objId = request.object.id;
+	console.log(objId);
 	 console.log("Transaction saved! - BeforeSave");
 	 Parse.Cloud.run('pull', { id: objId}).then(function(data) {
 	      response.success();
