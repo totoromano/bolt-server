@@ -61,8 +61,8 @@ Parse.Cloud.define("pull", function(req,res){
 	Parse.Cloud.httpRequest({
 		method: 'POST',
 		uri : "https://sandbox.api.visa.com/visadirect/fundstransfer/v1/pullfundstransactions",
-		key: '',
-		cert: '',
+		key: fs.readFileSync(keyFile),
+		cert: fs.readFileSync(certificateFile),
 		headers: {
 		'Content-Type' : 'application/json',
 		'Accept' : 'application/json',
