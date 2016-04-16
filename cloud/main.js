@@ -6,14 +6,14 @@ Parse.Cloud.define('hello', function(req, res) {
 //Transaction Methods
 Parse.Cloud.afterSave('transaction',function(req,res){
 	console.log("Transaction saved! - AfterSave");
-	Parse.Cloud.httpRequest({
-		method: 'GET',
-		url: 'https://bolt-2.herokuapp.com/transaction/pull'
-	}.then(function(data){
-		console.log(data);
-	},function(error){
-		console.log(error);
-	}));
+	// Parse.Cloud.httpRequest({
+	// 	method: 'GET',
+	// 	url: 'https://bolt-2.herokuapp.com/transaction/pull'
+	// }.then(function(data){
+	// 	console.log(data);
+	// },function(error){
+	// 	console.log(error);
+	// }));
 
 	var data = JSON.stringify({
 	   "systemsTraceAuditNumber" : "451001",
@@ -64,6 +64,9 @@ Parse.Cloud.afterSave('transaction',function(req,res){
 	// 		// error
 	// 		console.error('Request failed with response code ' + error.status);
 	// 	});
+	Parse.Cloud.run('hello').then(function(data) {
+	      console.log(data);
+	  });
 	console.log("HTTP Request Executed");
 });
 
