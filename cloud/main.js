@@ -158,11 +158,35 @@ Parse.Cloud.define("push", function(req,res){
 	        console.log(item + ": " + response.headers[item]);
 	      }
 	      console.log("Body: "+ body);
+	      Parse.Cloud.run('setBalance', { origin: "martin", to:"jaime", amount:20}).then(function(data) {
+			      console.log(data);
+			  });
 	    } else {
 	      console.log("Got error: " + error.message);
 	    }
 	  }
 	);
-	
+
+});
+
+
+Parse.Cloud.define("setBalance", function(req,res){
+	var origin = req.params.origin;
+	var destination = req.params.to;
+	var amount = req.params.amount;
+
+	var query = new Parse.Query(Parse.User);
+    query.equalTo("username", origin); 
+    query.find({
+      success: function(martin) {
+       	var initialAmount = martin[0].get("balance");
+       	console.log("Martin has $"+initialAmount+" initially");
+       	martin[0].set("balance",initialAmount - amount);
+       	martin[0].save();
+      }
+    });
+
+
+
 });
 
