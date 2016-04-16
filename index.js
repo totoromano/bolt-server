@@ -59,6 +59,7 @@ var httpServer = require('http').createServer(app);
 httpServer.listen(port, function() {
     console.log('parse-server-example running on port ' + port + '.');
 });
+console.log("SERVER HERE");
 
 // This will enable the Live Query real-time server
 ParseServer.createLiveQueryServer(httpServer);
