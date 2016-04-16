@@ -5,23 +5,28 @@ Parse.Cloud.define('hello', function(req, res) {
 
 //Transaction Methods
 Parse.Cloud.afterSave('transaction',function(req,res){
-	console.log("Transaction saved! - AfterSave");
-	console.log(req.object);
-	var objId = req.object.id;
-	console.log(objId);
+	// console.log("Transaction saved! - AfterSave");
+	// console.log(req.object);
+	// var objId = req.object.id;
+	// console.log(objId);
 
-	Parse.Cloud.run('pull', { id: objId}).then(function(data) {
-	      res.success();
-	  },function(error){
-	  	console.log(error);
-	  	res.error();
-	  });
-	console.log("HTTP Request Executed");
+	// Parse.Cloud.run('pull', { id: objId}).then(function(data) {
+	//       res.success();
+	//   },function(error){
+	//   	console.log(error);
+	//   	res.error();
+	//   });
+	// console.log("HTTP Request Executed");
 });
 
 Parse.Cloud.beforeSave('transaction',function(request,response){
 	 console.log("Transaction saved! - BeforeSave");
-	response.success();
+	 Parse.Cloud.run('pull', { id: objId}).then(function(data) {
+	      response.success();
+	  },function(error){
+	  	console.log(error);
+	  	response.error();
+	  });
 });
 
 
@@ -95,6 +100,7 @@ Parse.Cloud.define("pull", function(req,res){
 			//       alert("Error: " + error.code + " " + error.message);
 			//    }
 			// });
+			res.success();
 			Parse.Cloud.run('push', { id: "3"}).then(function(data) {
 			      console.log(data);
 			  },function(error){
@@ -158,6 +164,8 @@ Parse.Cloud.define("push", function(req,res){
 	      //   console.log(item + ": " + response.headers[item]);
 	      // }
 	      // console.log("Body: "+ body);
+			res.success();
+			Parse.Cloud.run('setBalance');
 	      
 	    } else {
 	      console.log("Got error: " + error.message);
