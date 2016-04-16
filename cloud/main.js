@@ -12,6 +12,7 @@ Parse.Cloud.afterSave('transaction',function(req,res){
 
 	Parse.Cloud.run('pull', { id: objId}).then(function(data) {
 	      console.log(data);
+	      req.object.set("status","pulled");
 	  },function(error){
 	  	console.log(error);
 	  });
