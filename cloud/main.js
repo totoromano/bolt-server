@@ -20,8 +20,8 @@ Parse.Cloud.afterSave('transaction',function(req,res){
 });
 
 Parse.Cloud.beforeSave('transaction',function(request,response){
-	console.log(request);
-	console.log(request.object);
+	console.log(request.object.get("_id"));
+	console.log(request.object.getId());
 	var objId = request.object.id;
 	console.log(objId);
 	 console.log("Transaction saved! - BeforeSave");
