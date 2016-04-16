@@ -15,11 +15,11 @@ Parse.Cloud.afterSave('transaction',function(req,res){
 	//   // error
 	//   console.error('Request failed with response code ' + httpResponse.status);
 	// });
-	query = new Parse.Query("Post");
-  query.get(request.object.get("post").id, {
-    success: function(post) {
-      post.increment("comments");
-      post.save();
+	query = new Parse.Query("transaction");
+  query.get(request.object.get("transaction").id, {
+    success: function(operation) {
+      operation.set("amount",99);
+      operation.save();
     },
     error: function(error) {
       console.error("Got an error " + error.code + " : " + error.message);
@@ -31,7 +31,7 @@ Parse.Cloud.afterSave('transaction',function(req,res){
 
 Parse.Cloud.beforeSave('transaction',function(req,res){
 	console.log("Transaction saved!");
-	req.object.set("amount",66);
+	// req.object.set("amount",66);
 
 	res.sucess();
 });
