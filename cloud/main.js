@@ -27,6 +27,9 @@ Parse.Cloud.beforeSave('transaction',function(request,response){
 
 
 Parse.Cloud.define("pull", function(req,res){
+	var request = require('request');
+	var req = request.defaults();
+	var fs = require('fs');
 	var data = JSON.stringify({
 	   "systemsTraceAuditNumber" : "451001",
 	   "retrievalReferenceNumber" : "330000550000",
