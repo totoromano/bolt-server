@@ -20,7 +20,6 @@ Parse.Cloud.beforeSave('transaction',function(request,response){
 	 console.log("Transaction saved! - BeforeSave");
 	 console.log(request);
 	// request.object.set("amount", 66);
-
 	response.success();
 });
 
