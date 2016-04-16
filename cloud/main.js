@@ -181,18 +181,8 @@ Parse.Cloud.define("setBalance", function(req,res){
       success: function(martin) {
        	var initialAmount = martin[0].get("balance");
        	console.log("Martin has $"+initialAmount+" initially and has to pay: $"+amount);
-       	martin.set("balance",10);
-       	martin.save(null, {
-	        success: function(anotherUser) {
-	          // The user was saved successfully.
-	          response.success("Successfully updated user.");
-	        },
-	        error: function(gameScore, error) {
-	          // The save failed.
-	          // error is a Parse.Error with an error code and description.
-	          response.error("Could not save changes to user.");
-	        }
-	      });
+       	martin[0].set("balance",10);
+        martin[0].save();
       }
     });
 
