@@ -225,7 +225,7 @@ Parse.Cloud.define("setBalance", function(req,res){
 
 
 //Bolt Task Methods
-Parse.Cloud.beforeSave('boltTask',function(request,response){
+Parse.Cloud.afterSave('boltTask',function(request,response){
 	console.log("Task at: "+request.object.get("zip"));
 	Parse.Cloud.httpRequest({
 	  url: 'http://maps.googleapis.com/maps/api/geocode/json?',
