@@ -230,7 +230,10 @@ Parse.Cloud.afterSave('boltTask',function(request,response){
 	console.log("Task at: "+request.object.get("zip"));
 	Parse.Cloud.httpRequest({
 	  url: 'http://maps.googleapis.com/maps/api/geocode/json?',
-	  params:'address='+request.object.get("zip"),'key=AIzaSyCKmFoZu6sJ9GKRdBVYmIZ-0f2BoK0ipgk'
+	  params:{
+	  	address:request.object.get("zip"),
+	  	key:'AIzaSyCKmFoZu6sJ9GKRdBVYmIZ-0f2BoK0ipgk'
+	  }
 	}).then(function(httpResponse){
 		var data = JSON.parse(httpResponse.text);
 		console.log(JSON.parse(httpResponse.text));
