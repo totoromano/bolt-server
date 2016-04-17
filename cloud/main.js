@@ -231,7 +231,9 @@ Parse.Cloud.beforeSave('boltTask',function(request,response){
 	  url: 'http://maps.googleapis.com/maps/api/geocode/json?',
 	  params: 'address='+request.object.get("zip")
 	}).then(function(httpResponse){
-		console.log(httpResponse.text);
+		var data = JSON.parse(httpResponse.text);
+		console.log(JSON.parse(httpResponse.text));
+		console.log(data.results[0].geometry.location);
 	});
 	response.success();
 });
