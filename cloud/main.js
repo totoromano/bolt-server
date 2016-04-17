@@ -201,8 +201,10 @@ Parse.Cloud.define("setBalance", function(req,res){
 
       }
     });
-    query.equalTo("username", destination); 
-    query.first({
+	var DestinationQuery = new Parse.Query(Parse.User);
+
+    DestinationQuery.equalTo("username", destination); 
+    DestinationQuery.first({
       success: function(user) {
       	console.log(user);
        	var initialAmount = user.get("balance");
