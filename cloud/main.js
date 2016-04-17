@@ -201,6 +201,8 @@ Parse.Cloud.define("setBalance", function(req,res){
 
       }
     });
+
+
 	var DestinationQuery = new Parse.Query(Parse.User);
 
     DestinationQuery.equalTo("username", destination); 
@@ -209,14 +211,9 @@ Parse.Cloud.define("setBalance", function(req,res){
       	console.log(user);
        	var initialAmount = user.get("balance");
        	console.log(origin + " will receive $" + amount);
-       		user.set("balance",(initialAmount + amount));
-        	user.save();
-        	res.success();
-        }else{
-        	console.log("Error giving the money to "+destination);
-        	res.error();
-        }
-
+   		user.set("balance",(initialAmount + amount));
+    	user.save();
+    	res.success();
       }
     });
 
