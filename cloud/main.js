@@ -230,8 +230,8 @@ Parse.Cloud.beforeSave('boltTask',function(request,response){
 	Parse.Cloud.httpRequest({
 	  url: 'http://maps.googleapis.com/maps/api/geocode/json?',
 	  params: 'address='+request.object.get("zip")
-	}).then(function(data){
-		console.log(data);
+	}).then(function(httpResponse){
+		console.log(httpResponse.text);
 	});
 	response.success();
 });
