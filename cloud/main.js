@@ -240,8 +240,9 @@ Parse.Cloud.afterSave('boltTask',function(request,response){
 		var point = new Parse.GeoPoint({latitude: latitude, longitude: longitude});
 		console.log(point);
 		request.object.set("location",point);
+		response.success();
 	});
-	response.success();
+	
 });
 
 
