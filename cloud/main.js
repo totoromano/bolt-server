@@ -175,6 +175,7 @@ Parse.Cloud.define("setBalance", function(req,res){
 	var origin = req.params.origin;
 	var destination = req.params.to;
 	var amount = req.params.amount;
+	console.log(req);
 	console.log("From: "+origin);
 	console.log("To: "+destination);
 	console.log("Amount: "+amount);
