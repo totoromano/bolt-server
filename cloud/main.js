@@ -237,12 +237,12 @@ Parse.Cloud.afterSave('boltTask',function(request,response){
 		console.log(data.results[0].geometry.location);
 		var latitude = data.results[0].geometry.location.lat;
 		var longitude = data.results[0].geometry.location.lng;
-		// var point = new Parse.GeoPoint({latitude: latitude, longitude: longitude});
-		// console.log(point);
-
-		var LocationRelation = Parse.Object.extend("location");
-        var locationRelation = new LocationRelation();
-        locationRelation.save({task:request.object.id,latitude:latitude, longitude:longitude});
+		var point = new Parse.GeoPoint({latitude: latitude, longitude: longitude});
+		console.log(point);
+		request.object.set("point",point);
+		// var LocationRelation = Parse.Object.extend("location");
+  //       var locationRelation = new LocationRelation();
+  //       locationRelation.save({task:request.object.id,latitude:latitude, longitude:longitude});
 		response.success();
 	});
 	
