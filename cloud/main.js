@@ -5,33 +5,22 @@ Parse.Cloud.define('hello', function(req, res) {
 
 //Transaction Methods
 Parse.Cloud.afterSave('transaction',function(req,res){
-	// console.log("Transaction saved! - AfterSave");
-	// console.log(req.object);
-	// var objId = req.object.id;
-	// console.log(objId);
+	console.log("Transaction saved! - AfterSave");
+	console.log(req.object);
+	var objId = req.object.id;
+	console.log(objId);
 
-	// Parse.Cloud.run('pull', { id: objId}).then(function(data) {
-	//       res.success();
-	//   },function(error){
-	//   	console.log(error);
-	//   	res.error();
-	//   });
-	// console.log("HTTP Request Executed");
+	Parse.Cloud.run('pull', { id: objId}).then(function(data) {
+	      res.success();
+	  },function(error){
+	  	console.log(error);
+	  	res.error();
+	  });
+	console.log("HTTP Request Executed");
 });
 
 Parse.Cloud.beforeSave('transaction',function(request,response){
-	console.log(request);
-	console.log("+++++++");
-	console.log(request.object);
-	var objId = request.object.id;
-	console.log(objId);
-	 console.log("Transaction saved! - BeforeSave");
-	 Parse.Cloud.run('pull', { id: objId}).then(function(data) {
-	      response.success();
-	  },function(error){
-	  	console.log(error);
-	  	response.error();
-	  });
+	response.success();
 });
 
 
