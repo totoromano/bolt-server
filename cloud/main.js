@@ -193,8 +193,10 @@ Parse.Cloud.define("setBalance", function(req,res){
        	if(amount <= initialAmount){
        		user.set("balance",(initialAmount - amount));
         	user.save();
+        	res.success();
         }else{
         	console.log(origin + " doesn't have enough $ to pay $" + amount);
+        	res.error();
         }
 
       }
