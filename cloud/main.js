@@ -239,8 +239,10 @@ Parse.Cloud.afterSave('boltTask',function(request,response){
 		var longitude = data.results[0].geometry.location.lng;
 		// var point = new Parse.GeoPoint({latitude: latitude, longitude: longitude});
 		// console.log(point);
-		request.object.set("latitude",latitude);
-		request.object.set("longitude",longitude);
+
+		var LocationRelation = Parse.Object.extend("location");
+        var locationRelation = new LocationRelation();
+        locationRelation.save({task:request.object.id,latitude:latitude, longitude:longitude});
 		response.success();
 	});
 	
