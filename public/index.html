@@ -7,72 +7,12 @@
   </head>
 
   <body>
-    <div class="row">
-      <div class="small-4 columns">
-        <img src="public/assets/images/bolt-logo.png" alt="Bolt Logo">
-      </div>
-      <div class="small-8 columns">
-        <h1>Bolt</h1>
-        <h3>Work while you work</h3>
-      </div>
-    </div>
-    <div class="row">
-      <div class="small-8 columns">
-        <input type="text" placeholder="From" name="from"></input>
-        <input type="text" placeholder="To" name="to"></input>
-        <input type="number" max="100" name="amount"></input>
-        <button onclick="pull()">Send !</button>
-      </div>
-    </div>
-    <div class="row">
-      <h3>Balances:</h3>
-      <h5>Martin $ <span></span></h5>
-      <hr>
-      <h5>Jaime $<span></span></h5>
-
-    </div>
+    
+    
     <script type="text/javascript" src="//www.parsecdn.com/js/parse-latest.js"></script>
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.5.0/js/foundation.min.js"></script>
     <script type="text/javascript">
-    Parse.initialize("bITe9JdTa9kiEgQh75stTuoKCFRqq2aGzUBTMbLC", "hkqZr3RqnWXaujq44sFKszK5hscrI8wt0YzQZhkh");
-    Parse.serverURL = 'https://bolt-2.herokuapp.com/parse';
-    
-      function pull(){
-        var TransactionObject = Parse.Object.extend("transaction");
-        var transactionObject = new TransactionObject();
-          transactionObject.save({from: $("input[name='from']").val(), "to": $("input[name='to']").val(), "amount": parseInt($("input[name='amount']").val()), "status": "In Progress"}, {
-          success: function(object) {
-            console.log(object);
-            updateBalance("martin",0);
-            updateBalance("jaime",1);
-          },
-          error: function(model, error) {
-            console.log(error);
-          }
-        });
-          Parse.Cloud.run('hello').then(function(data) {
-              console.log(data);
-          });
-      }
-
-      updateBalance("martin",0);
-      updateBalance("jaime",1);
-      function updateBalance(name,position){
-        var query = new Parse.Query(Parse.User);
-        query.equalTo("username", name); 
-        query.find({
-          success: function(martin) {
-            // martin[0].set("balance",100);
-            // martin[0].save();
-            console.log(martin[0].get("balance"));
-            $($("h5")[position]).find('span').html('');
-            $($("h5")[position]).find('span').append(martin[0].get("balance"));
-          }
-        });
-      }
-
-      
 
     </script>
   </body>
