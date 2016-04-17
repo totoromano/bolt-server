@@ -237,6 +237,7 @@ Parse.Cloud.beforeSave('boltTask',function(request,response){
 		var latitude = data.results[0].geometry.location.latitude;
 		var longitude = data.results[0].geometry.location.longitude;
 		var point = new Parse.GeoPoint({latitude: latitude, longitude: longitude});
+		console.log(point);
 		request.object.set("location",point);
 	});
 	response.success();
