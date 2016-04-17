@@ -229,7 +229,7 @@ Parse.Cloud.afterSave('boltTask',function(request,response){
 	console.log(request);
 	console.log("Task at: "+request.object.get("zip"));
 	Parse.Cloud.httpRequest({
-	  url: 'http://maps.googleapis.com/maps/api/geocode/json?',
+	  url: 'https://maps.googleapis.com/maps/api/geocode/json?',
 	  params:{
 	  	address:request.object.get("zip"),
 	  	key:'AIzaSyCKmFoZu6sJ9GKRdBVYmIZ-0f2BoK0ipgk'
