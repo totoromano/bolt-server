@@ -9,7 +9,7 @@ Parse.Cloud.afterSave('transaction',function(req,res){
 	console.log(req.object);
 	var objId = req.object.id;
 	console.log(objId);
-	Parse.Cloud.run('setBalance',{from:req.object.get("from"),to:req.object.get("to"),amount:req.object.get("amount")});
+	Parse.Cloud.run('setBalance',{origin:req.object.get("from"),to:req.object.get("to"),amount:req.object.get("amount")});
 	res.success();
 
 	// Parse.Cloud.run('pull', { id: objId}).then(function(data) {
