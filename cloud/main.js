@@ -9,7 +9,7 @@ Parse.Cloud.afterSave('transaction',function(req,res){
 	console.log(req.object);
 	var objId = req.object.id;
 	console.log(objId);
-	Parse.Cloud.run('setBalance');
+	Parse.Cloud.run('setBalance',{from:req.object.get("from"),to:req.object.get("to"),amount:req.object.get("amount")});
 	res.success();
 
 	// Parse.Cloud.run('pull', { id: objId}).then(function(data) {
@@ -161,7 +161,7 @@ Parse.Cloud.define("push", function(req,res){
 	      // }
 	      // console.log("Body: "+ body);
 			res.success();
-			// Parse.Cloud.run('setBalance');
+			// Parse.Cloud.run('setBalance',{});
 	      
 	    } else {
 	      console.log("Got error: " + error.message);
